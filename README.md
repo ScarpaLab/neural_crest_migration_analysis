@@ -64,7 +64,7 @@ python 02-extraction_scripts/cyh_create_kymo_tiff.py
 
 ## Expected run time
 
-- **Cellpose segmentation:** 10 min to 1 hr depending on image size — see the [Cellpose README](https://github.com/MouseLand/cellpose) for details.
+- **Cellpose segmentation:** 10 min to 1 hr depending on image size and your computer spec — see the [Cellpose README](https://github.com/MouseLand/cellpose) for details.
 - **Manual annotation:** the most time-intensive step, as it requires active review and editing of segmentation masks.
 - **All other steps:** typically < 1 min per sample.
 
