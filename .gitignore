@@ -3,3 +3,12 @@
 *.csv
 *.svg
 *.zip
+01-preprocess/CLAUDE.md
+CLAUDE.md
+05-plots/README.md
+03-extracted_params/README.md
+02-extraction_scripts/README.md
+01-preprocess/README.md
+02-extraction_scripts/README.md
+04-plot-script/README.md
+*.pyc
