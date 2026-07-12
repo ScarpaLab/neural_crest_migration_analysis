@@ -22,11 +22,9 @@ Stages must be run in order.
 
 ## Prerequisites
 
-- Python environment with:
-  - [Cellpose](https://github.com/MouseLand/cellpose) (GPU-accelerated segmentation)
-  - [Napari](https://napari.org/) (interactive label editing)
-  - `tifffile`, `numpy`, `scipy`, `matplotlib`, `pandas`, `scikit-image`, `tqdm`
-- CUDA-capable GPU required only for Cellpose step, otherwise all can run on a normal laptop
+- **Analysis environment:** install from `cellMigEnv.yml` (~5–10 min). See [conda docs](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) for instructions. Includes `tifffile`, `numpy`, `scipy`, `matplotlib`, `pandas`, `scikit-image`, `tqdm`, and all other dependencies at pinned versions.
+- **Cellpose:** install in a **separate** conda environment (~5 min) — see the [Cellpose installation guide](https://github.com/MouseLand/cellpose) for details. A CUDA-capable GPU is recommended for segmentation; all other pipeline steps run fine on CPU.
+- **Napari:** included in the analysis environment for interactive label editing.
 
 ## Setup
 
@@ -63,6 +61,12 @@ python 02-extraction_scripts/cyh_create_kymo_tiff.py
 # 3. Analyse and plot
 #    Open and run: 04-plot-script/analysis.ipynb
 ```
+
+## Expected run time
+
+- **Cellpose segmentation:** 10 min to 1 hr depending on image size — see the [Cellpose README](https://github.com/MouseLand/cellpose) for details.
+- **Manual annotation:** the most time-intensive step, as it requires active review and editing of segmentation masks.
+- **All other steps:** typically < 1 min per sample.
 
 ## Data
 
