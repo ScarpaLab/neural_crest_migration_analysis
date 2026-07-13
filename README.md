@@ -70,11 +70,48 @@ python 02-extraction_scripts/cyh_create_kymo_tiff.py
 
 ## Data
 
-- **Raw data root:** config.data_dir
+- **Raw data root:** `config.data_dir` (edit `utility/config.py` to match your machine)
 - **Subject naming:** `sub-XXX` (currently subjects 17–26)
 - **Channel convention:** Channel 0 = membrane, Channel 1 = nucleus
 - **Image format:** Multi-frame TIFF stacks; masks saved as uint16 TIFFs
 - Generated data files (`.tif`, `.csv`, `.pkl`) are git-ignored
+
+### Data directory structure
+
+Files are organised under `data_dir` following a strict naming convention enforced by `DataLoader.generate_file_path`. **Do not rename files or flatten the folder structure** — path construction will break.
+
+P.S. the file structure largely follow [NeuroBlueprint](https://neuroblueprint.neuroinformatics.dev/latest/index.html) architecture
+
+```
+data_dir/
+├── metadata.csv                            ← subject-level metadata (see below)
+└── sub-XXX/                                ← one folder per subject; XXX = zero-padded integer
+    ├── sub-XXX_data-xyProjection.tif       ← raw input; shape (T, 2, H, W), uint16
+    │                                            channel 0 = membrane, channel 1 = nucleus
+    ├── sub-XXX_data-memMask.tif            ← membrane auto-segmentation mask, uint16
+    ├── sub-XXX_data-nucMask.tif            ← nucleus auto-segmentation mask, uint16
+    ├── sub-XXX_data-memManualLabel.tif     ← (optional) manually corrected membrane labels, uint16
+    ├── sub-XXX_data-nucManualLabel.tif     ← (optional) manually corrected nucleus labels, uint16
+    ├── sub-XXX_data-drift.pkl              ← cumulative drift array; shape (T, 2), int16
+    └── sub-XXX_data-driftPlot.png          ← drift QC figure (not consumed downstream)
+```
+
+All files follow the pattern: `sub-<XXX>/sub-<XXX>_data-<name>.<ext>`
+
+### metadata.csv
+
+Located at `config.metadata_path`. Loaded with `util.load_metadata()` and passed row-by-row to `DataLoader`.
+
+| Column | Type | Example | Description |
+|--------|------|---------|-------------|
+| `sub` | integer | `17` | Subject ID; must match the `XXX` in each `sub-XXX/` directory |
+| `experimenterName` | string | `soraya` | Name of the experimenter who acquired the data |
+| `date` | string (DD-MM-YYYY) | `24-07-2024` | Acquisition date |
+| `treatment` | string | `15uM CBD`, `control` | Experimental condition / drug treatment |
+| `comments` | string | `MAX_XY4_CiliobrevinD15uMregistered` | Free-text notes, typically the original filename |
+| `bodyPart` | string | `trunk`, `cranial` | Region of the embryo imaged |
+
+All columns are loaded into `DataLoader` as instance attributes and can be used for grouping or filtering in analysis scripts. The CSV must be encoded as `unicode_escape` (handled automatically by `load_metadata()`).
 
 ## Utility package
 
