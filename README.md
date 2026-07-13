@@ -2,6 +2,8 @@
 
 Image analysis pipeline for studying trunk neural crest cell migration from 2D time-lapse fluorescence microscopy data.
 
+Test data can be found [HERE](https://zenodo.org/records/21338711?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjhiZjkzMThmLWRjYWUtNDllOS05M2RmLTAzOGIzOGYzZGM4NCIsImRhdGEiOnt9LCJyYW5kb20iOiJmYzcwOTQ1OGEwYzFmYzE1ZTIyYWViYWE5ZDRkODY4YyJ9.Osc1MuT-vMuDbYTnUIYi-ctS9fLVLULRvwCuQX-Phb7ZIK-EuUakiGEM0-YWK4tcgv6L9HiDd1QC9ED_0LrJPg)
+
 ## Pipeline overview & Folder description
 
 ```
